@@ -3,11 +3,21 @@ package main
 import (
     "log"
     "github.com/gin-gonic/gin"
+    "github.com/gin-contrib/cors"
     "scale-backend/handlers"
 )
 
 func main() {
     r := gin.Default()
+
+    // CORS middleware
+    r.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"*"}, // or specify domains like []string{"http://localhost:3000"}
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+        ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true,
+    }))
 
     PORT := ":8080"
 
@@ -21,6 +31,6 @@ func main() {
         api.DELETE("/items/:id", handlers.DeleteItem)
     }
 
-    log.Println("Server starting on port %s...", PORT)
+    log.Printf("Server starting on port %s...", PORT)
     r.Run(PORT)
 }

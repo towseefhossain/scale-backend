@@ -4,6 +4,7 @@ import (
     "net/http"
     "strconv"
     "github.com/gin-gonic/gin"
+    "time"
 )
 
 // GetItems handles GET requests to retrieve all items
@@ -23,8 +24,7 @@ func GetItem(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid item ID"})
         return
     }
-
-    c.JSON(http.StatusOK, gin.H{"item": id})
+    c.JSON(http.StatusOK, gin.H{"timestamp": time.Now().UnixMilli(), "item_id": id})
 }
 
 // UpdateItem handles PUT requests to update an item

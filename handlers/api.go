@@ -9,12 +9,12 @@ import (
 
 // GetItems handles GET requests to retrieve all items
 func GetItems(c *gin.Context) {
-    c.JSON(http.StatusOK, gin.H{"items": [3]int{1, 2, 3}})
+    c.JSON(http.StatusOK, gin.H{"timestamp": time.Now().UnixMilli()})
 }
 
 // CreateItem handles POST requests to create a new item
 func CreateItem(c *gin.Context) {
-    c.JSON(http.StatusCreated, "item created")
+    c.JSON(http.StatusCreated, gin.H{"timestamp": time.Now().UnixMilli()})
 }
 
 // GetItem handles GET requests for a specific item
@@ -29,10 +29,10 @@ func GetItem(c *gin.Context) {
 
 // UpdateItem handles PUT requests to update an item
 func UpdateItem(c *gin.Context) {
-    c.JSON(http.StatusOK, "item updated")
+    c.JSON(http.StatusOK, gin.H{"timestamp": time.Now().UnixMilli()})
 }
 
 // DeleteItem handles DELETE requests to remove an item
 func DeleteItem(c *gin.Context) {
-    c.JSON(http.StatusOK, "item deleted")
+    c.JSON(http.StatusOK, gin.H{"timestamp": time.Now().UnixMilli()})
 }
